@@ -1,4 +1,10 @@
-import React from "react;"
-import "./style.css";
+// import React from "react;"
+// import "./style.css";
 
-export default EmployeeTable;
+// function EmployeeTable(props) {
+//     return (
+
+//     )
+// }
+
+// export default EmployeeTable;
