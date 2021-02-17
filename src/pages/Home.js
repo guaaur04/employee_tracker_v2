@@ -39,13 +39,43 @@ export default class Home extends Component {
         this.searchEmployees(this.state.seach);
     };
 
+    //This is where the filteredArray goes here 
+    updateResults = () => {
+        const newArray = this.state.people.filter(obj => {
+            const last = obj.name
+            if(this.state.search === last) {
+                return onbj
+            }
+        })
+    }
+
+    //Where will you call this updateResults function?
+
+
     render() {
         return (
             <div>
-
+            
                 {this.state.employees.map(person => <Card person={person} />)}
 
             </div>
         )
     }
 }
+
+// render() {
+//     return (
+//         <Wrapper>
+//             <Header>Employees List</Header>
+//             {this.state.employees.map(employee => <EmployeeRow
+//                 id={employee.id}
+//                 key={employee.id}
+//                 name={employee.id}
+//                 email={employee.email}
+//                 image={employee.image}
+//                 />
+//                 )}
+//         </Wrapper> 
+//     )
+// }
+ 
