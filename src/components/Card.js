@@ -21,7 +21,7 @@ export default function Card(props) {
             <strong>Location:</strong> {props.data.location.country}
           </li>
     </ul>
-    ));
+
       </div>
     </div>
   )

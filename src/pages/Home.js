@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
-import Search from '../components/Search';
+// import Search from '../components/Search';
 import API from "../utils/API";
 // import Search from "../components/Search";
 
@@ -8,7 +8,7 @@ export default class Home extends Component {
     state = {
         employees: [],
         search: "",
-        filteredEmployees: [{}]
+        filteredEmployees: []
     }
 
     componentDidMount() {
@@ -22,7 +22,11 @@ export default class Home extends Component {
         API.getEmployees()
             .then(res => {
             this.setState ({ 
+                //The list we don't want to change 
             employees: res.data.results,
+
+                //The list we want to change
+            filteredEmployees: res.data.results,
         });
         console.log(res)
             })
@@ -78,7 +82,7 @@ export default class Home extends Component {
 
 {/* Map array of employees returning the card  */}
 
-            {this.state.employees.map(employees => <Card data = {employees} key={employees.cell} />  )}    
+            {this.state.filteredEmployees.map(employees => <Card data = {employees} key={employees.cell} />  )}    
             
             </div>
         );
