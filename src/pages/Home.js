@@ -1,82 +1,83 @@
-import React, { Component } from 'react'
-import Card from "../components/Card"
-import employeeArray from "../employees.json"
+import React, { Component } from 'react';
+import API from "../utils/API";
+// import Card from "../components/Card";
+// import Search from "../components/Search";
 
 export default class Home extends Component {
     state = {
         employees: [],
+        search: ""
     }
 
     componentDidMount() {
-        this.setState({ employees: employeeArray });
+        // this.setState({ employees: employeeArray });
+        this.searchEmployees();
+
     }
 
-    searchEmployees = query => {
-        API.search(query)
-        .then(res => this.setState({ result: res.data }))
-        .catch(err => console.log(err));
+    searchEmployees = () => {
+        //API call to Random Generator using getEmployees method from API.js
+        API.getEmployees()
+            .then(res => this.setState({ employees: res.data.results }))
+            .catch(err => console.log(err));
     };
 
-    handleInputChange = event => {
+    // handleInputChange = event => {
 
-        const value = event.target.value;
-        const name = event.target.name;
-        const id = event.target.getAttribute("data-id")
+    //     const value = event.target.value;
+    //     const name = event.target.name;
+    //     const id = event.target.getAttribute("data-id")
 
-        const stateCopy = [...this.state.employees]
+    //     const stateCopy = [...this.state.employees]
 
-        this.state.forEach(obj => {
-            if (obj.id == id) {
-                obj[name] = value
-            }
-        })
+    //     this.state.forEach(obj => {
+    //         if (obj.id == id) {
+    //             obj[name] = value
+    //         }
+    //     })
 
-        this.setState({ people:stateCopy })
-    }
+    //     this.setState({ employees: stateCopy })
+    // }
 
-    handleFormSubmit = event => {
-        event.preventDefault();
-        this.searchEmployees(this.state.seach);
-    };
+    // handleFormSubmit = event => {
+    //     event.preventDefault();
+    //     this.searchEmployees(this.state.search);
+    // };
 
     //This is where the filteredArray goes here 
-    updateResults = () => {
-        const newArray = this.state.people.filter(obj => {
-            const last = obj.name
-            if(this.state.search === last) {
-                return onbj
-            }
-        })
-    }
 
-    //Where will you call this updateResults function?
 
+    // updateResults = () => {
+    //     const newArray = this.state.employees.filter(obj => {
+    //         const last = obj.name
+    //         if (this.state.search === last) {
+    //             return obj
+    //         }
+    //     })
+    // }
 
     render() {
         return (
-            <div>
-            
-                {this.state.employees.map(person => <Card person={person} />)}
 
-            </div>
-        );
+            <div> Hello!!! </div>
+            // <Wrapper>
+            //     <Header></Header>
+            //     <Search></Search>
+
+                // {this.state.employees.map(employee => <Card employee={employee} />)}
+
+                // {this.state.employees.map(employee => <EmployeeRow
+                //     id={this.state.id}
+                //     key={this.state.key}
+                //     name={this.state.name}
+                //     email={this.state.email}
+                //     src={this.state.image}
+                // />)}
+
+            // </Wrapper >
+
+
+        )
     }
+
 }
-
-
-// render() {
-//     return (
-//         <Wrapper>
-//             <Header>Employees List</Header>
-//             {this.state.employees.map(employee => <EmployeeRow
-//                 id={employee.id}
-//                 key={employee.id}
-//                 name={employee.id}
-//                 email={employee.email}
-//                 image={employee.image}
-//                 />
-//                 )}
-//         </Wrapper> 
-//     )
-// }
- 

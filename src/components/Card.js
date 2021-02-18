@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-import Search from './Search'
 
 export default function Card(props) {
     return (
@@ -13,4 +12,3 @@ export default function Card(props) {
   );
 }
 
-export default Card;
