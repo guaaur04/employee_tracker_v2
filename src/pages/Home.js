@@ -1,12 +1,14 @@
 import React, { Component } from 'react';
+import Card from '../components/Card';
+import Search from '../components/Search';
 import API from "../utils/API";
-// import Card from "../components/Card";
 // import Search from "../components/Search";
 
 export default class Home extends Component {
     state = {
         employees: [],
-        search: ""
+        search: "",
+        filteredEmployees: [{}]
     }
 
     componentDidMount() {
@@ -18,26 +20,35 @@ export default class Home extends Component {
     searchEmployees = () => {
         //API call to Random Generator using getEmployees method from API.js
         API.getEmployees()
-            .then(res => this.setState({ employees: res.data.results }))
-            .catch(err => console.log(err));
+            .then(res => {
+            this.setState ({ 
+            employees: res.data.results,
+        });
+        console.log(res)
+            })
+
+        .catch(err => console.log(err));
+
     };
 
-    // handleInputChange = event => {
 
-    //     const value = event.target.value;
-    //     const name = event.target.name;
-    //     const id = event.target.getAttribute("data-id")
+    handleInputChange = event => {
+        console.log(event.target.value);
+        const value = event.target.value;
+        const searchedName = this.state.employees.filter(input => {
+            let person = Object.values(input).join("").toLowerCase()
+            return person.indexOf(value.toLowerCase()) !== -1;
+        })
+        
+        this.setState({
+            filteredEmployees: searchedName
+        })
 
-    //     const stateCopy = [...this.state.employees]
+     }
 
-    //     this.state.forEach(obj => {
-    //         if (obj.id == id) {
-    //             obj[name] = value
-    //         }
-    //     })
 
-    //     this.setState({ employees: stateCopy })
-    // }
+
+
 
     // handleFormSubmit = event => {
     //     event.preventDefault();
@@ -59,25 +70,18 @@ export default class Home extends Component {
     render() {
         return (
 
-            <div> Hello!!! </div>
-            // <Wrapper>
-            //     <Header></Header>
-            //     <Search></Search>
+            <div> Hello!!! 
 
-                // {this.state.employees.map(employee => <Card employee={employee} />)}
+            <input types="search" onChange = {event => this.handleInputChange(event)}> 
+            
+            </input>
 
-                // {this.state.employees.map(employee => <EmployeeRow
-                //     id={this.state.id}
-                //     key={this.state.key}
-                //     name={this.state.name}
-                //     email={this.state.email}
-                //     src={this.state.image}
-                // />)}
+{/* Map array of employees returning the card  */}
 
-            // </Wrapper >
-
-
-        )
+            {this.state.employees.map(employees => <Card data = {employees} key={employees.cell} />  )}    
+            
+            </div>
+        );
     }
 
-}
+} 
