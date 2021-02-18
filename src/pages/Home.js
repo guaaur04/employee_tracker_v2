@@ -59,9 +59,10 @@ export default class Home extends Component {
                 {this.state.employees.map(person => <Card person={person} />)}
 
             </div>
-        )
+        );
     }
 }
+
 
 // render() {
 //     return (

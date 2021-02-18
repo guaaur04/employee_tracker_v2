@@ -1,19 +1,11 @@
-
 import React from "react";
-import OmdbContainer from "./components/OmdbContainer";
+import Home from "./pages/Home";
 
 function App() {
-  return <OmdbContainer />;
+  return <Home />;
 }
 
 export default App;
-
-
-
-
-
-
-
 
 
 
