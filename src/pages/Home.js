@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
 import Card from '../components/Card';
+import Navbar from '../components/Navbar';
 // import Search from '../components/Search';
 import API from "../utils/API";
+
 
 export default class Home extends Component {
     state = {
@@ -80,10 +82,10 @@ export default class Home extends Component {
 
     render() {
         return (
-
-            <div> Employee Directory
-
-                <div></div>
+            
+            <div class> 
+<Navbar />
+                <div> <p>Type for matching results</p></div>
 
                 <input types="search" onChange={event => this.handleInputChange(event)}>
 

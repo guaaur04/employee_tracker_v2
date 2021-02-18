@@ -1,9 +1,8 @@
 import React from "react";
-import "./style.css";
 
 function Navbar() {
     return (
-        <nav class="navbar navbar-light bg-light">
+        <nav class="navbar navbar-dark bg-dark">
             <span class="navbar-brand mb-0 h1">Employee Directory</span>
         </nav>
     );

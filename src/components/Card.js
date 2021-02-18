@@ -1,8 +1,8 @@
-import React from 'react'
+import React from 'react';
 
 export default function Card(props) {
     return (
-    <div className="card">
+    <div className="card" style={{justifyContent:"center"}}>
       <div className="img-container">
       </div>
       <div className="content">
