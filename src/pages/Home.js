@@ -2,7 +2,6 @@ import React, { Component } from 'react';
 import Card from '../components/Card';
 // import Search from '../components/Search';
 import API from "../utils/API";
-// import Search from "../components/Search";
 
 export default class Home extends Component {
     state = {
@@ -21,17 +20,17 @@ export default class Home extends Component {
         //API call to Random Generator using getEmployees method from API.js
         API.getEmployees()
             .then(res => {
-            this.setState ({ 
-                //The list we don't want to change 
-            employees: res.data.results,
+                this.setState({
+                    //The list we don't want to change 
+                    employees: res.data.results,
 
-                //The list we want to change
-            filteredEmployees: res.data.results,
-        });
-        console.log(res)
+                    //The list we want to change
+                    filteredEmployees: res.data.results,
+                });
+                console.log(res)
             })
 
-        .catch(err => console.log(err));
+            .catch(err => console.log(err));
 
     };
 
@@ -43,24 +42,32 @@ export default class Home extends Component {
             let person = Object.values(input).join("").toLowerCase()
             return person.indexOf(value.toLowerCase()) !== -1;
         })
-        
+
         this.setState({
             filteredEmployees: searchedName
         })
 
-     }
+    }
 
-
-
-
-
-    // handleFormSubmit = event => {
-    //     event.preventDefault();
-    //     this.searchEmployees(this.state.search);
-    // };
 
     //This is where the filteredArray goes here 
+    sortEmployees = () => {
+        const sorted = this.state.filteredEmployees.sort(
+            (a, b) => {
+                if (a.name.first < b.name.first) {
+                    return -1;
+                }
+                if (b.name.first > b.name.first) {
+                    return 1;
+                }
+                // a must be equal to b
+                return 0;
+            }
+        )
 
+        this.setState({ filteredEmployees: sorted })
+
+    }
 
     // updateResults = () => {
     //     const newArray = this.state.employees.filter(obj => {
@@ -74,16 +81,23 @@ export default class Home extends Component {
     render() {
         return (
 
-            <div> Hello!!! 
+            <div> Employee Directory
 
-            <input types="search" onChange = {event => this.handleInputChange(event)}> 
-            
-            </input>
+                <div></div>
 
-{/* Map array of employees returning the card  */}
+                <input types="search" onChange={event => this.handleInputChange(event)}>
 
-            {this.state.filteredEmployees.map(employees => <Card data = {employees} key={employees.cell} />  )}    
-            
+                </input>    
+
+                <p>Click to sort alphabetically by first name </p>
+                <button onClick={this.sortEmployees} className="btn btn-primary">
+                    Sort
+                 </button>
+
+                {/* Map array of employees returning the card  */}
+
+                {this.state.filteredEmployees.map(employees => <Card data={employees} key={employees.cell} />)}
+
             </div>
         );
     }
